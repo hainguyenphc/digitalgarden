@@ -30,5 +30,14 @@ services:
     # running in the original terminal window.
     # docker compose exec jekyll bundle exec jekyll build --config _config.yml,_config_production.yml
 
+    # Github Actions needs `x86_64-linux` platform support.
+    # ```
+    # Your bundle only supports platforms ["aarch64-linux-gnu"] but your local
+    # platform is x86_64-linux. Add the current platform to the lockfile with
+    # `bundle lock --add-platform x86_64-linux` and try again.
+    # Error: The process '/opt/hostedtoolcache/Ruby/3.2.11/x64/bin/bundle' failed with exit code 16
+    # ```
+    # docker compose exec jekyll bundle lock --add-platform x86_64-linux
+
 volumes:
   bundle_cache:
