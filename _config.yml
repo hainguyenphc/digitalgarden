@@ -10,6 +10,10 @@ theme: minima
 
 plugins:
   - jekyll-feed
+  - jekyll-remote-theme
+
+# With jekyll-remote-theme plugin enabled.
+remote_theme: jekyll/minima
 
 exclude:
   - Dockerfile
@@ -21,3 +25,7 @@ exclude:
   - README.md
 
 timezone: Asia/Ho_Chi_Minh
+
+sass:
+  quiet_deps: true
+  silence_deprecations: ["import", "color-functions", "global-builtin"]

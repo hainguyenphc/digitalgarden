@@ -1,4 +1,4 @@
-services:
+lservices:
 
   # `docker compose exec jekyll` runs a command inside the already-running 
   # container for the service named `jekyll`.
@@ -28,6 +28,7 @@ services:
     # For production build, open another terminal window and run this, while
     # keeping the container's main process (PID 1) when you do `docker compose up`
     # running in the original terminal window.
+    # See .github/workflows/deploy.yml file for an example.
     # docker compose exec jekyll bundle exec jekyll build --config _config.yml,_config_production.yml
 
     # Github Actions needs `x86_64-linux` platform support.
