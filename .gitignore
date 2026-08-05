@@ -25,3 +25,6 @@ Thumbs.db
 
 # Env/secrets, if you ever add any
 .env
+
+# WIP contents.
+_drafts
