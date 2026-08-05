@@ -18,8 +18,8 @@ jobs:
         with:
           ruby-version: '3.2'
           bundler-cache: true
-      - name: Build site
-        run: bundle exec jekyll build
+      - name: Build site, pick up production configs.
+        run: bundle exec jekyll build --config _config.yml,_config_production.yml
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
