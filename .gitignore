@@ -1,0 +1,27 @@
+# Jekyll build output
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# Bundler
+vendor/
+.bundle/
+Gemfile.lock    # see note below — you may want to KEEP this tracked
+
+# Docker
+# (nothing container-specific to ignore by default, but add if you
+# ever generate local override files)
+docker-compose.override.yml
+
+# Obsidian vault metadata
+.obsidian/
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+
+# Env/secrets, if you ever add any
+.env

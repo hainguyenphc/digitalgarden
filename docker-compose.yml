@@ -1,0 +1,34 @@
+services:
+
+  # `docker compose exec jekyll` runs a command inside the already-running 
+  # container for the service named `jekyll`.
+  jekyll:
+    build: .
+    ports:
+      - "4000:4000"
+      - "35729:35729"  # livereload
+    volumes:
+      - .:/srv/jekyll
+      - bundle_cache:/usr/local/bundle
+    
+    # The command being executed inside the `jekyll` container.
+    # 1/
+    # `bundle exec` runs the following command using the exact gem versions 
+    # locked in your Gemfile.lock, rather than whatever gem versions happen to 
+    # be installed globally. This matters because you could have multiple 
+    # versions of the jekyll gem installed in the container, and bundle exec 
+    # makes sure it uses the one your project actually depends on.
+    # 2/
+    # jekyll serve --host 0.0.0.0 --livereload --drafts — the real Jekyll command: 
+    # start the dev server, bind to all network interfaces 
+    # (0.0.0.0, not just localhost, so it's reachable from outside the container), 
+    # enable live-reload, and include draft posts.
+    command: bundle exec jekyll serve --host 0.0.0.0 --livereload --drafts
+
+    # For production build, open another terminal window and run this, while
+    # keeping the container's main process (PID 1) when you do `docker compose up`
+    # running in the original terminal window.
+    # docker compose exec jekyll bundle exec jekyll build --config _config.yml,_config_production.yml
+
+volumes:
+  bundle_cache:

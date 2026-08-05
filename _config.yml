@@ -1,0 +1,23 @@
+title: My Blog
+description: "Notes on CS, running, and whatever else"
+baseurl: ""
+url: "http://localhost:4000"
+
+markdown: kramdown
+permalink: /:year/:month/:day/:title/
+
+theme: minima
+
+plugins:
+  - jekyll-feed
+
+exclude:
+  - Dockerfile
+  - docker-compose.yml
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
+  - README.md
+
+timezone: Asia/Ho_Chi_Minh
