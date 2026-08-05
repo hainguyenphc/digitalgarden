@@ -1,4 +1,4 @@
-lservices:
+services:
 
   # `docker compose exec jekyll` runs a command inside the already-running 
   # container for the service named `jekyll`.

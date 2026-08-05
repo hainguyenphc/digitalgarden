@@ -6,12 +6,12 @@ baseurl: ""
 markdown: kramdown
 permalink: /:year/:month/:day/:title/
 
-theme: minima
-
 plugins:
   - jekyll-feed
   - jekyll-remote-theme
 
+# Remove or comment out, as it conflicts with remote_theme.
+# theme: minima
 # With jekyll-remote-theme plugin enabled.
 remote_theme: jekyll/minima
 
