@@ -1,0 +1,76 @@
+/* _sass/_forms.scss */
+:root {
+  --form-bg: #ffffff;
+  --form-border: #e2e8f0;
+  --form-radius: 12px;
+  --form-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --primary-color: #3b82f6;
+  --text-main: #1e293b;
+}
+
+.form-wrapper {
+  background-color: #2563eb;
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: var(--form-bg);
+  border: 1px solid var(--form-border);
+  border-radius: var(--form-radius);
+  box-shadow: var(--form-shadow);
+}
+
+.form-title {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--text-main);
+  text-align: center;
+}
+
+.custom-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  label {
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: var(--text-main);
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--form-border);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+  }
+
+  button[type="submit"] {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background-color: #2563eb;
+    }
+  }
+}

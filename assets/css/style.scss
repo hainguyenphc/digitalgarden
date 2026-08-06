@@ -1,12 +1,7 @@
 ---
 ---
-// @import "minima";
-
 @import
   "minima/skins/{{ site.minima.skin | default: 'classic' }}",
   "minima/initialize";
 
-// .site-title {
-//   font-size: 55px !important;
-//   color: blue !important;
-// }
+@import "forms.scss"

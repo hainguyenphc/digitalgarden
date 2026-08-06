@@ -4,6 +4,37 @@ title: "The quick way to see how fast you run in km and miles"
 custom_js: "running_pace_conversion.js"
 ---
 
+<small>Inspired by [Run North West's Race Pace Conversion Chart](https://www.runnorthwest.co.uk/pages/race-pace-conversion-chart).</small>
+
+<div class="form-wrapper">
+  <h2 class="form-title">Race Pace Conversion</h2>
+  <form class="custom-form">
+    <label for="kph-input">Kilometres Per Hour:</label>
+    <input id="kph-input" type="number" step="0.01">
+
+    <label for="mph-input">Miles Per Hour:</label>
+    <input id="mph-input" type="number" step="0.01">
+
+    <label for="minutes-per-kilometre">Minutes Per Kilometre:</label>
+    <input id="minutes-per-kilometre" type="number" step="0.01">
+
+    <label for="minutes-per-mile">Minutes Per Mile:</label>
+    <input id="minutes-per-mile" type="number" step="0.01">
+
+    <label for="5k-time">5K time (HH:MM:SS):</label>
+    <input id="5k-time" type="text" placeholder="00:25:00">
+
+    <label for="10k-time">10K time (HH:MM:SS):</label>
+    <input id="10k-time" type="text" placeholder="00:50:00">
+
+    <label for="hm-time">HM time (HH:MM:SS):</label>
+    <input id="hm-time" type="text" placeholder="01:50:00">
+
+    <label for="fm-time">FM time (HH:MM:SS):</label>
+    <input id="fm-time" type="text" placeholder="03:45:00">
+  </form>
+</div>
+
 <table id="running-pace-conversion-table">
   <thead>
     <tr>

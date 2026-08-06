@@ -116,3 +116,162 @@ const populate_running_pace_conversion_table = () => {
 };
 
 populate_running_pace_conversion_table();
+
+// 1 mile in km
+const MILE_KM = 1.609344;
+
+// race distances in km
+const DISTANCES = {
+	"5k-time": 5,
+	"10k-time": 10,
+	"hm-time": 21.0975,
+	"fm-time": 42.195,
+};
+
+const ALL_IDS = [
+	"kph-input",
+	"mph-input",
+	"minutes-per-kilometre",
+	"minutes-per-mile",
+	"5k-time",
+	"10k-time",
+	"hm-time",
+	"fm-time",
+];
+
+const TIME_FIELDS = Object.keys(DISTANCES); // 5k-time, 10k-time, hm-time, fm-time
+
+function round2(n) {
+	return Math.round(n * 100) / 100;
+}
+
+// Parse "HH:MM:SS" into total seconds.
+// Returns null if the string isn't a complete, valid HH:MM:SS yet
+// (so the user can keep typing without getting interrupted).
+function parseHms(str) {
+	const match = str.match(/^(\d{1,2}):([0-5]?\d):([0-5]?\d)$/);
+	if (!match) {
+		return null;
+	}
+
+	const hours = parseInt(match[1], 10);
+	const minutes = parseInt(match[2], 10);
+	const seconds = parseInt(match[3], 10);
+
+	return hours * 3600 + minutes * 60 + seconds;
+}
+
+// Format total seconds as "HH:MM:SS" with zero-padding.
+function formatHms(totalSeconds) {
+	totalSeconds = Math.round(totalSeconds);
+
+	const hh = Math.floor(totalSeconds / 3600);
+	const mm = Math.floor((totalSeconds % 3600) / 60);
+	const ss = totalSeconds % 60;
+
+	const pad = (n) => String(n).padStart(2, "0");
+
+	return `${pad(hh)}:${pad(mm)}:${pad(ss)}`;
+}
+
+// Take whichever non-time field changed, and its raw numeric value,
+// and figure out what kph that corresponds to.
+function computeKph(id, value) {
+	if (!value || value <= 0) {
+		return null;
+	}
+
+	if (id === "kph-input") {
+		return value;
+	}
+
+	if (id === "mph-input") {
+		return value * MILE_KM;
+	}
+
+	if (id === "minutes-per-kilometre") {
+		return 60 / value;
+	}
+
+	if (id === "minutes-per-mile") {
+		const mph = 60 / value;
+		return mph * MILE_KM;
+	}
+
+	return null;
+}
+
+// A time field (5k/10k/hm/fm) changed. Convert its HH:MM:SS string
+// into kph, using that race's distance.
+function computeKphFromTimeField(id, rawValue) {
+	const totalSeconds = parseHms(rawValue);
+	if (totalSeconds === null || totalSeconds <= 0) {
+		return null;
+	}
+
+	const totalMinutes = totalSeconds / 60;
+	const distanceKm = DISTANCES[id];
+	const minPerKm = totalMinutes / distanceKm;
+
+	return 60 / minPerKm;
+}
+
+// Given a kph value, compute what every field's value should be.
+// Speed/pace fields are plain numbers; race time fields are seconds
+// (to be formatted as HH:MM:SS).
+function computeAllValues(kph) {
+	const mph = kph / MILE_KM;
+	const minPerKm = 60 / kph;
+	const minPerMile = 60 / mph;
+
+	return {
+		"kph-input": kph,
+		"mph-input": mph,
+		"minutes-per-kilometre": minPerKm,
+		"minutes-per-mile": minPerMile,
+		"5k-time": minPerKm * DISTANCES["5k-time"] * 60,
+		"10k-time": minPerKm * DISTANCES["10k-time"] * 60,
+		"hm-time": minPerKm * DISTANCES["hm-time"] * 60,
+		"fm-time": minPerKm * DISTANCES["fm-time"] * 60,
+	};
+}
+
+// Write the computed values into every field except the one
+// the user is actively typing in.
+function updateFields(kph, excludeId) {
+	const values = computeAllValues(kph);
+
+	for (const id of ALL_IDS) {
+		if (id === excludeId) {
+			continue;
+		}
+
+		const field = document.getElementById(id);
+
+		if (TIME_FIELDS.includes(id)) {
+			field.value = formatHms(values[id]); // values[id] is seconds here
+		} else {
+			field.value = round2(values[id]);
+		}
+	}
+}
+
+function handleInput(event) {
+	const id = event.target.id;
+	const raw = event.target.value;
+
+	let kph;
+	if (TIME_FIELDS.includes(id)) {
+		kph = computeKphFromTimeField(id, raw);
+	} else {
+		kph = computeKph(id, parseFloat(raw));
+	}
+
+	if (kph !== null && kph > 0 && isFinite(kph)) {
+		updateFields(kph, id);
+	}
+}
+
+for (const id of ALL_IDS) {
+	document.getElementById(id).addEventListener("input", handleInput);
+}
