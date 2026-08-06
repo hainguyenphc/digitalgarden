@@ -4,7 +4,7 @@ title: "The quick way to see how fast you run in km and miles"
 custom_js: "running_pace_conversion.js"
 ---
 
-<small>Inspired by [Run North West's Race Pace Conversion Chart](https://www.runnorthwest.co.uk/pages/race-pace-conversion-chart).</small>
+<small>Inspired by <a href="https://www.runnorthwest.co.uk/pages/race-pace-conversion-chart" target="_blank" rel="noopener noreferrer">Run North West's Race Pace Conversion Chart</a>.</small>
 
 <div class="form-wrapper">
   <h2 class="form-title">Race Pace Conversion</h2>
@@ -32,6 +32,7 @@ custom_js: "running_pace_conversion.js"
 
     <label for="fm-time">FM time (HH:MM:SS):</label>
     <input id="fm-time" type="text" placeholder="03:45:00">
+
   </form>
 </div>
 
