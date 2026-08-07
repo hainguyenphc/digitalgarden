@@ -1,0 +1,57 @@
+---
+layout: post
+---
+<article class="note">
+  <header>
+    <!-- <h1>{{ page.title }}</h1> -->
+    <p class="meta">
+      {{ page.date | date: "%B %d, %Y" }}
+      
+      <div>
+        Categories:
+        {% if page.categories %}
+          {% for category in page.categories %}<span class="category">{{ category }}</span>{% endfor %}
+        {% endif %}
+      </div>
+
+      <div>
+        Tags:
+        {% if page.tags %}
+          {% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+        {% endif %}
+      </div>
+    </p>
+  </header>
+
+  <div class="working-notes-disclaimer">
+    <strong>Working notes.</strong> This is part of my running log as I go through my CS degree —
+    expect gaps, rough edges, and things I get wrong before I get them right.
+    If you spot an error, <a href="mailto:{{ site.email }}">let me know</a>.
+  </div>
+
+  <div class="note-content">
+    {{ content }}
+  </div>
+
+  {% if page.categories %}
+    {% capture related_list %}
+      {% for note in site.notes %}
+        {% unless note.url == page.url %}
+          {% assign shared = note.categories | where_exp: "cat", "page.categories contains cat" %}
+          {% if shared.size > 0 %}
+            <li><a href="{{ note.url }}">{{ note.title }}</a></li>
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+    {% endcapture %}
+
+    {% assign related_list = related_list | strip %}
+
+    {% if related_list != "" %}
+    <footer class="related-notes">
+      <h3>More on {{ page.categories | join: ", " }}</h3>
+      <ul>{{ related_list }}</ul>
+    </footer>
+    {% endif %}
+  {% endif %}
+</article>

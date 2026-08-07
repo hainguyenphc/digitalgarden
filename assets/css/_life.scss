@@ -1,0 +1,65 @@
+// ================
+// Life Individual Page
+// ================
+
+.life-post .meta {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.life-content {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 640px; /* narrower measure, feels more like reading than reference */
+}
+
+.life-footer .also-see {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+// ================
+// Life Index Page
+// ================
+
+.life-index-header .intro {
+  color: #666;
+  max-width: 560px;
+  margin-bottom: 2.5rem;
+}
+
+.life-list {
+  list-style: none;
+  padding: 0;
+}
+
+.life-entry {
+  padding: 1.1rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.life-entry a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  text-decoration: none;
+  color: inherit;
+}
+
+.life-entry-title {
+  font-size: 1.05rem;
+}
+
+.life-entry-date {
+  font-size: 0.85rem;
+  color: #999;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.life-entry-tags {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  color: #aaa;
+}

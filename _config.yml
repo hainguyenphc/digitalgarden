@@ -3,6 +3,8 @@ description: "Notes on CS, running, and whatever else"
 url: "http://localhost:4000"
 baseurl: ""
 
+email: "hai.nguyen.phc@gmail.com"
+
 markdown: kramdown
 permalink: /:year/:month/:day/:title/
 
@@ -29,3 +31,31 @@ timezone: Asia/Ho_Chi_Minh
 sass:
   quiet_deps: true
   silence_deprecations: ["import", "color-functions", "global-builtin"]
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
+  notes:
+    output: true
+    permalink: /notes/:categories/:path/
+  life:
+    output: true
+    permalink: /life/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+  - scope:
+      path: ""
+      type: "notes"
+    values:
+      layout: "note"
+  - scope:
+      path: ""
+      type: "life"
+    values:
+      layout: "life"
