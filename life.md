@@ -17,7 +17,7 @@ permalink: /life
   <ul class="life-list">
     {% for post in life_posts %}
     <li class="life-entry">
-      <a href="{{ post.url }}">
+      <a href="{{ post.url | relative_url }}">
         <span class="life-entry-title">{{ post.title }}</span>
         <span class="life-entry-date">{{ post.date | date: "%b %d, %Y" }}</span>
       </a>
