@@ -360,7 +360,17 @@ Thumbs.db
 
 ---
 
-## 9. Known Open Items / Decisions Pending
+## 9. External Asset Hosting (Google Drive)
+
+A dedicated Google account — **`hainguyen.digitalgarden.blog@gmail.com`** — hosts a Google Drive that holds all code snippets, sample files, and test files referenced in blog posts.
+
+- **Why:** keeps the blog repos small — large or numerous attachments (datasets, PDFs, binaries, example projects) live in Drive instead of being committed to git.
+- Link to Drive files from posts rather than checking the files into `_posts/`/`assets/`.
+- Account is separate from any personal Google account so Drive access/sharing for the blog can be managed independently.
+
+---
+
+## 10. Known Open Items / Decisions Pending
 
 - [ ] Confirm `baseurl` in `_config.yml` is fixed to `/digitalgarden` (was `digitialgarden`, both typo and missing leading slash).
 - [ ] Decide: toggle `--drafts` on/off vs. leave permanently on in `command:`.
