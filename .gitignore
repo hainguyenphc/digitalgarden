@@ -23,6 +23,9 @@ Thumbs.db
 *.swp
 .vscode/
 
+# Anaconda Navigator project-browser metadata
+anaconda_projects/
+
 # Env/secrets, if you ever add any
 .env
 
