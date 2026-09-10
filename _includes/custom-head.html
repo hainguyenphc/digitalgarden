@@ -1,0 +1,60 @@
+{%- comment -%}
+  Opt-in per page via front matter:
+    math: true      -> load MathJax 3
+    mermaid: true   -> load mermaid.js and render ```mermaid blocks
+{%- endcomment -%}
+
+{%- if page.math -%}
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+      // kramdown emits $$...$$ as <script type="math/tex">; teach MathJax 3 to read it
+      renderActions: {
+        findScriptMathTex: [10, function (doc) {
+          document.querySelectorAll('script[type^="math/tex"]').forEach(function (node) {
+            var display = !!node.type.match(/mode=display/);
+            var math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+            var text = document.createTextNode('');
+            node.parentNode.replaceChild(text, node);
+            math.start = { node: text, delim: '', n: 0 };
+            math.end = { node: text, delim: '', n: 0 };
+            doc.math.push(math);
+          });
+        }, '']
+      }
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{%- endif -%}
+
+{%- if page.mermaid -%}
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+  function render() {
+    // kramdown renders ```mermaid as <pre><code class="language-mermaid">
+    document.querySelectorAll('code.language-mermaid, .language-mermaid > code').forEach(function (code) {
+      var target = code.closest('pre') || code;
+      var pre = document.createElement('pre');
+      pre.className = 'mermaid';
+      pre.textContent = code.textContent.trim();
+      target.replaceWith(pre);
+    });
+    mermaid.initialize({ startOnLoad: false, theme: 'neutral', securityLevel: 'strict' });
+    mermaid.run({ querySelector: 'pre.mermaid' });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', render);
+  } else {
+    render();
+  }
+</script>
+{%- endif -%}
