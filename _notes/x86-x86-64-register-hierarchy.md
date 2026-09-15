@@ -1,10 +1,9 @@
 ---
-title: "x86 and x86-64 Register Hierarchy: AL, AH, AX, EAX, RAX"
+title: "x86 and x86-64 CPU Register Hierarchy: AL, AH, AX, EAX, RAX, etc..."
 date: 2026-09-14
 tags: [assembly, x86, x86-64, computer-architecture]
+category: cpu
 ---
-
-# x86 and x86-64 Register Hierarchy: AL, AH, AX, EAX, RAX
 
 I kept mixing these up, so here's the version I wish someone had just told me straight up.
 

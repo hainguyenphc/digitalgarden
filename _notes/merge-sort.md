@@ -3,6 +3,7 @@ title: "Merge Sort"
 date: 2026-09-10
 math: true
 mermaid: true
+category: ["algorithm"]
 tags:
   - algorithms
   - sorting
